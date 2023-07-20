@@ -1,16 +1,20 @@
 #!/usr/bin/python3
 def list_division(my_list_1, my_list_2, list_length):
-    novo_list = []
-    for z in range(list_length):
-        var = 0
+    result = []
+    tmp_result = 0
+    for i in range(0, list_length):
         try:
-            quotient = my_list_1[z] / my_list_2[z]
+            tmp_result = my_list_1[i] / my_list_2[i]
         except TypeError:
+            tmp_result = 0
             print("wrong type")
         except ZeroDivisionError:
+            tmp_result = 0
             print("division by 0")
         except IndexError:
+            tmp_result = 0
             print("out of range")
         finally:
-            novo_list.append(var)
-    return novo_list
+            pass
+        result.append(tmp_result)
+    return result
