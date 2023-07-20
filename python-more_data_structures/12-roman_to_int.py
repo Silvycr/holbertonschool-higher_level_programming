@@ -20,8 +20,8 @@ def roman_to_int(roman_string):
             return (0)
 
         if (x != (len(roman_string) - 1) and
-                roman[roman_string[x]] < roman[roman_string[x + 1]]):
-                bango += roman[roman_string[x]] * -1
+            roman[roman_string[x]] < roman[roman_string[x + 1]]):
+            bango += roman[roman_string[x]] * -1
 
         else:
             bango += roman[roman_string[x]]
