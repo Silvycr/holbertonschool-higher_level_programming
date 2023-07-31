@@ -1,92 +1,83 @@
 #!/usr/bin/python3
-""" """
-
+"""Define a class called Node"""
 
 class Node:
-    """
-    defines node
+    """Node of a singly linked list.
+    Private instance attribute: data:
+        - property def data(self)
+        - property setter def data(self, value)
+    Private instance attribute: next_node:
+        - property def next_node(self)
+        - property setter def next_node(self, value)
+    Instantiation with data and next_node.
     """
 
     def __init__(self, data, next_node=None):
-        """
-        initializes node
-
-        Attributes:
-            data: data stored in node
-            next_node: address of next node in list
-        """
+        """Initializes the data of the node."""
         self.data = data
         self.next_node = next_node
 
     @property
     def data(self):
-        """
-        finds data
-        """
+        """Retrieves the data from the node."""
         return self.__data
 
     @data.setter
     def data(self, value):
-        """
-        validates that data is an integer
-        """
-        if type(value) is not int:
-            raise TypeError('data must be an integer')
-        else:
-            self.__data = value
+        """Sets the data into a node."""
+        if not isinstance(value, int):
+            raise TypeError("data must be an integer")
+        self.__data = value
 
     @property
     def next_node(self):
-        """
-        finds next_node
-        """
+        """Retrieves the next_node."""
         return self.__next_node
 
     @next_node.setter
     def next_node(self, value):
-        """
-        validates next_node as either None or a node
-        """
-        if type(value) is not Node and value is not None:
-            raise TypeError('next_node must be a Node object')
-        else:
-            self.__next_node = value
+        """Sets the next_node."""
+        if not isinstance(value, Node) and value is not None:
+            raise TypeError("next_node must be a Node object")
+        self.__next_node = value
 
 
 class SinglyLinkedList:
-    """
-    defines singly linked list class
+    """ Singly linked list.
+    Private instance attribute: head.
+    Simple instantiation.
+    Public instance method: def sorted_insert(self, value).
     """
 
     def __init__(self):
-        """
-        initializes singly linked list
-        """
-        self.__head = None
+        """Initializes the linked list."""
+        self.head = None
 
     def __str__(self):
-        """
-        returns string version of list
-        """
-        string = ""
-        if self.__head is None:
-            return string
-        runner = self.__head
-        while runner is not None:
-            string += str(runner.data)
-            runner = runner.next_node
-            if runner is not None:
-                string += "\n"
-        return string
+        """For the print statement in the main file."""
+        my_str = ""
+        node = self.head
+        while node:
+            my_str += str(node.data)
+            my_str += '\n'
+            node = node.next_node
+        return my_str[:-1]
 
     def sorted_insert(self, value):
-        """
-        inserts a new node into correct position in list
-        """
-        if self.__head is None or value < self.__head.data:
-            self.__head = Node(value, self.__head)
+        """Inserts a node in a sorted linked list."""
+        new_node = Node(value)
+
+        if self.head is None:
+            self.head = new_node
             return
-        runner = self.__head
-        while runner.next_node is not None and runner.next_node.data < value:
-            runner = runner.next_node
-        runner.next_node = Node(value, runner.next_node)
+
+        if value < self.head.data:
+            new_node.next_node = self.head
+            self.head = new_node
+            return
+
+        node = self.head
+        while node.next_node and node.next_node.data < value:
+            node = node.next_node
+        new_node.next_node = node.next_node
+        node.next_node = new_node
