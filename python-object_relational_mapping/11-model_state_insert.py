@@ -20,3 +20,4 @@ if __name__ == '__main__':
     session.add(insert_state)
     session.commit()
     print(insert_state.id)
+    session.close()
