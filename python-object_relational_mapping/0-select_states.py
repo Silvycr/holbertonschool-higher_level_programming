@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-''' Script to retrieve data from a database '''
+''' Script for connect to a database '''
 import sys
 import MySQLdb
 
