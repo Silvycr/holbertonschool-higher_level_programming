@@ -23,3 +23,6 @@ if __name__ == '__main__':
             break
     if is_here is False:
         print('Not found')
+    
+    session.commit()
+    session.close()
